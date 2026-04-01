@@ -1,98 +1,75 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { gsap } from "gsap";
+import { useEffect, useRef } from "react";
 
 const STAR_COUNT = 320;
 
-interface Star {
-  id: number;
-  x: number;
-  y: number;
-  size: number;
-  delay: number;
-  duration: number;
-  baseOpacity: number;
-}
-
-function generateStars(): Star[] {
-  return Array.from({ length: STAR_COUNT }, (_, i) => ({
-    id: i,
-    x: Math.random() * 100,
-    y: Math.random() * 100,
-    size: Math.random() < 0.6 ? 1 : Math.random() < 0.7 ? 2 : 3,
-    delay: Math.random() * 6,
-    duration: 1.5 + Math.random() * 3,
-    baseOpacity: 0.15 + Math.random() * 0.45,
-  }));
-}
-
 export function StarfieldBackground() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  // Lazy initializer runs only on client; returns [] during SSR to avoid hydration mismatch
-  const [stars] = useState<Star[]>(() =>
-    typeof window !== "undefined" ? generateStars() : []
-  );
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
-    if (!stars.length) return;
-    const container = containerRef.current;
-    if (!container) return;
+    const canvas = canvasRef.current;
+    if (!canvas) return;
 
-    const ctx = gsap.context(() => {
-      const starEls = container.querySelectorAll<HTMLElement>(".star");
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
 
-      starEls.forEach((star, i) => {
-        const data = stars[i];
-        if (!data) return;
+    const resize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+    resize();
+    window.addEventListener("resize", resize);
 
-        gsap.set(star, { opacity: data.baseOpacity * 0.3 });
+    interface Star {
+      x: number;
+      y: number;
+      size: number;
+      opacity: number;
+      baseOpacity: number;
+      delta: number;
+      speed: number;
+    }
 
-        gsap.to(star, {
-          opacity: data.baseOpacity,
-          duration: data.duration,
-          delay: data.delay,
-          ease: "sine.inOut",
-          repeat: -1,
-          yoyo: true,
-        });
+    const stars: Star[] = Array.from({ length: STAR_COUNT }, () => ({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      size: Math.random() < 0.6 ? 1 : Math.random() < 0.7 ? 2 : 3,
+      opacity: Math.random(),
+      baseOpacity: 0.15 + Math.random() * 0.45,
+      delta: Math.random() > 0.5 ? 1 : -1,
+      speed: 0.003 + Math.random() * 0.007,
+    }));
 
-        if (data.size === 3) {
-          gsap.to(star, {
-            scale: 1.8,
-            opacity: 1,
-            duration: 0.2,
-            delay: data.delay + data.duration,
-            ease: "power2.out",
-            yoyo: true,
-            repeat: -1,
-            repeatDelay: data.duration * 2 + Math.random() * 4,
-          });
-        }
-      });
-    }, container);
+    let animId: number;
 
-    return () => ctx.revert();
-  }, [stars]);
+    const draw = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (const star of stars) {
+        star.opacity += star.delta * star.speed;
+        if (star.opacity >= star.baseOpacity) { star.opacity = star.baseOpacity; star.delta = -1; }
+        if (star.opacity <= star.baseOpacity * 0.2) { star.opacity = star.baseOpacity * 0.2; star.delta = 1; }
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.size / 2, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255,255,255,${star.opacity})`;
+        ctx.fill();
+      }
+      animId = requestAnimationFrame(draw);
+    };
+
+    draw();
+
+    return () => {
+      cancelAnimationFrame(animId);
+      window.removeEventListener("resize", resize);
+    };
+  }, []);
 
   return (
-    <div
-      ref={containerRef}
+    <canvas
+      ref={canvasRef}
       className="fixed inset-0 pointer-events-none z-[-1]"
       aria-hidden="true"
-    >
-      {stars.map((star) => (
-        <span
-          key={star.id}
-          className="star absolute rounded-full bg-white"
-          style={{
-            left: `${star.x}%`,
-            top: `${star.y}%`,
-            width: star.size,
-            height: star.size,
-          }}
-        />
-      ))}
-    </div>
+    />
   );
 }

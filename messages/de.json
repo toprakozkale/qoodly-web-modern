@@ -215,6 +215,11 @@
     "ctaButton": "Projekt starten →"
   },
   "assistant": {
-    "tooltip": "👋 Hallo! Wie kann ich helfen?"
+    "tooltip": "👋 Hallo! Wie kann ich helfen?",
+    "name": "Qoodly Assistent",
+    "status": "Online · Bereit zu helfen",
+    "greeting": "Hallo! 👋 Ich bin der Qoodly Assistent. Wie kann ich Ihnen heute helfen?",
+    "placeholder": "Nachricht schreiben...",
+    "autoReply": "Danke für Ihre Nachricht! Unser Team wird sich bald bei Ihnen melden. Bei dringenden Anfragen erreichen Sie uns über die Kontaktseite. 🚀"
   }
 }

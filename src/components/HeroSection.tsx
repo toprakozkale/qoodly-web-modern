@@ -121,7 +121,7 @@ export function HeroSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-screen flex flex-col justify-center pt-24 pb-20 px-6 md:px-12 overflow-hidden"
+      className="relative min-h-screen flex flex-col justify-center pt-8 md:pt-24 pb-20 px-6 md:px-12 overflow-hidden"
     >
       {/* Decorative Flower */}
       <div ref={flowerRef} className="absolute top-[22%] left-[12%] w-28 h-28 animate-spin-slow" style={{ animationDuration: "15s" }}>
@@ -243,7 +243,7 @@ export function HeroSection() {
       </div>
 
       {/* Bottom Content */}
-      <div className="absolute bottom-20 left-0 right-0 px-6 md:px-12 flex flex-col md:flex-row items-start md:items-end justify-between gap-8">
+      <div className="absolute bottom-20 md:bottom-20 left-0 right-0 px-6 md:px-12 flex flex-col md:flex-row items-start md:items-end justify-between gap-8">
         {/* Description */}
         <div className="flex items-start gap-4 max-w-sm">
           <span className="text-4xl text-white/60">{`{`}</span>

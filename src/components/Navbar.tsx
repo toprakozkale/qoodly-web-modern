@@ -134,24 +134,15 @@ export function Navbar() {
 
           {/* Logo */}
           <Link href="/" className="flex items-center" onClick={closeMenu}>
-            <svg
-              className="h-8 w-auto"
-              viewBox="0 0 108 30"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <defs>
-                <linearGradient id="navQGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%"   stopColor="#2ec4b6" />
-                  <stop offset="60%"  stopColor="#ff7057" />
-                  <stop offset="100%" stopColor="#1565c0" />
-                </linearGradient>
-              </defs>
-              <text x="0" y="24" fontFamily="Arial, sans-serif" fontSize="24" fontWeight="bold">
-                <tspan fill="url(#navQGrad)">Q</tspan>
-                <tspan fill="white">oodly</tspan>
-              </text>
-            </svg>
+            <span className="text-2xl font-bold leading-none">
+              <span style={{
+                background: "linear-gradient(135deg, #2ec4b6 0%, #ff7057 60%, #1565c0 100%)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+              }}>Q</span>
+              <span className="text-white">oodly</span>
+            </span>
           </Link>
 
           {/* Desktop Nav Links */}

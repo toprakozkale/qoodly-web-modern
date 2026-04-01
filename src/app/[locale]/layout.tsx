@@ -7,6 +7,7 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { StarfieldBackground } from "@/components/StarfieldBackground";
 import { CookieConsent } from "@/components/CookieConsent";
+import { FloatingAssistantWrapper } from "@/components/FloatingAssistantWrapper";
 import { locales } from "@/navigation";
 import { geistSans, geistMono } from "../layout";
 
@@ -175,6 +176,7 @@ export default async function LocaleLayout({
             {children}
             <Footer />
             <CookieConsent />
+            <FloatingAssistantWrapper />
           </SmoothScrollProvider>
         </NextIntlClientProvider>
       </body>

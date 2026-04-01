@@ -88,26 +88,56 @@ export function WhyQoodlySection() {
         <span className="text-white/60">{`}`}</span>
       </div>
 
-      {/* Decorative Elements */}
-      <div className="absolute top-[30%] right-[10%] w-24 h-24">
-        <svg viewBox="0 0 100 100" className="w-full h-full animate-spin-slow">
-          <defs>
-            <linearGradient id="orbitGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#9d4edd" />
-              <stop offset="100%" stopColor="#00b4d8" />
-            </linearGradient>
-          </defs>
-          <circle cx="50" cy="50" r="40" fill="none" stroke="url(#orbitGrad)" strokeWidth="2" strokeDasharray="5 5" />
-          <circle cx="50" cy="10" r="8" fill="#ff8c42" />
-          <circle cx="90" cy="50" r="5" fill="#ff6b9d" />
-          <circle cx="50" cy="90" r="6" fill="#88ce02" />
-        </svg>
+      {/* Decorative Orbitals — normal flow'da, text'in üstünde yatay sıra */}
+      <div className="flex items-center justify-between w-full max-w-5xl mb-10 pointer-events-none">
+        <div className="w-16 h-16 md:w-20 md:h-20 opacity-80 shrink-0">
+          <svg viewBox="0 0 100 100" className="w-full h-full animate-spin-slow">
+            <defs>
+              <linearGradient id="orbitGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#9d4edd" />
+                <stop offset="100%" stopColor="#00b4d8" />
+              </linearGradient>
+            </defs>
+            <circle cx="50" cy="50" r="40" fill="none" stroke="url(#orbitGrad1)" strokeWidth="2" strokeDasharray="5 5" />
+            <circle cx="50" cy="10" r="8" fill="#ff8c42" />
+            <circle cx="90" cy="50" r="5" fill="#ff6b9d" />
+            <circle cx="50" cy="90" r="6" fill="#88ce02" />
+          </svg>
+        </div>
+        <div className="w-16 h-16 md:w-20 md:h-20 opacity-80 shrink-0" style={{ marginTop: "-150px" }}>
+          <svg viewBox="0 0 100 100" className="w-full h-full animate-spin-slow" style={{ animationDuration: "18s" }}>
+            <defs>
+              <linearGradient id="orbitGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#88ce02" />
+                <stop offset="100%" stopColor="#ff6b9d" />
+              </linearGradient>
+            </defs>
+            <circle cx="50" cy="50" r="40" fill="none" stroke="url(#orbitGrad2)" strokeWidth="2" strokeDasharray="4 6" />
+            <circle cx="50" cy="10" r="6" fill="#00b4d8" />
+            <circle cx="90" cy="50" r="7" fill="#88ce02" />
+            <circle cx="10" cy="50" r="5" fill="#ff8c42" />
+          </svg>
+        </div>
+        <div className="w-16 h-16 md:w-20 md:h-20 opacity-80 shrink-0">
+          <svg viewBox="0 0 100 100" className="w-full h-full animate-spin-slow" style={{ animationDuration: "22s" }}>
+            <defs>
+              <linearGradient id="orbitGrad3" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#ff8c42" />
+                <stop offset="100%" stopColor="#9d4edd" />
+              </linearGradient>
+            </defs>
+            <circle cx="50" cy="50" r="40" fill="none" stroke="url(#orbitGrad3)" strokeWidth="2" strokeDasharray="6 4" />
+            <circle cx="50" cy="10" r="5" fill="#9d4edd" />
+            <circle cx="90" cy="50" r="8" fill="#ff8c42" />
+            <circle cx="50" cy="90" r="6" fill="#00b4d8" />
+          </svg>
+        </div>
       </div>
 
       {/* Main Text */}
       <div
         ref={textRef}
-        className="max-w-5xl text-center text-3xl md:text-5xl lg:text-6xl font-medium leading-tight"
+        className="relative max-w-5xl text-center text-3xl md:text-5xl lg:text-6xl font-medium leading-tight"
       >
         {mainText.split(" ").map((word, i) => {
           // Unicode-aware clean: removes punctuation but keeps letters from all scripts

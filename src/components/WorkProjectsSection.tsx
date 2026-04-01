@@ -107,7 +107,7 @@ export function WorkProjectsSection() {
             </span>
             <h3 className="text-xl font-bold text-white mb-2">{t("project1Title")}</h3>
             <p className="text-white/60 text-sm leading-relaxed mb-4">{t("project1Description")}</p>
-            <a href="#" className="inline-flex items-center gap-2 text-[#88ce02] text-sm font-medium group-hover:gap-3 transition-all">
+            <a href="https://www.weekweeky.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-[#88ce02] text-sm font-medium group-hover:gap-3 transition-all">
               {t("project1Cta")}
             </a>
           </div>
@@ -125,7 +125,7 @@ export function WorkProjectsSection() {
             </span>
             <h3 className="text-xl font-bold text-white mb-2">{t("project2Title")}</h3>
             <p className="text-white/60 text-sm leading-relaxed mb-4">{t("project2Description")}</p>
-            <a href="#" className="inline-flex items-center gap-2 text-[#2ec4b6] text-sm font-medium group-hover:gap-3 transition-all">
+            <a href="https://www.gfsglobalmakina.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-[#2ec4b6] text-sm font-medium group-hover:gap-3 transition-all">
               {t("project2Cta")}
             </a>
           </div>

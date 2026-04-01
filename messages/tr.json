@@ -215,6 +215,11 @@
     "ctaButton": "Projeye Başla →"
   },
   "assistant": {
-    "tooltip": "👋 Merhaba! Size nasıl yardımcı olabilirim?"
+    "tooltip": "👋 Merhaba! Size nasıl yardımcı olabilirim?",
+    "name": "Qoodly Asistanı",
+    "status": "Çevrimiçi · Yardıma hazır",
+    "greeting": "Merhaba! 👋 Ben Qoodly Asistanı. Size bugün nasıl yardımcı olabilirim?",
+    "placeholder": "Mesaj yazın...",
+    "autoReply": "Mesajınız için teşekkürler! Ekibimiz en kısa sürede size geri dönecektir. Acil durumlar için iletişim sayfamızdan bize ulaşabilirsiniz. 🚀"
   }
 }
