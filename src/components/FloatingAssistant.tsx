@@ -112,20 +112,41 @@ export function FloatingAssistant() {
     // 4. Pulse back
     tl.to(pulseRef.current, { opacity: 0.5, duration: 0.3 }, 0.7);
   };
-
-  const handleSend = () => {
+  const handleSend = async () => {
     const trimmed = input.trim();
-    if (!trimmed) return;
-    setMessages((prev) => [...prev, { id: Date.now(), from: "user", text: trimmed }]);
+    if (!trimmed || isTyping) return;
+
+    const userMsg: Message = { id: Date.now(), from: "user", text: trimmed };
+    const newMessages = [...messages, userMsg];
+    
+    setMessages(newMessages);
     setInput("");
     setIsTyping(true);
-    setTimeout(() => {
-      setIsTyping(false);
+
+    try {
+      const response = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ messages: newMessages }),
+      });
+
+      if (!response.ok) throw new Error("Failed to connect");
+
+      const data = await response.json();
+      
       setMessages((prev) => [
         ...prev,
-        { id: Date.now() + 1, from: "ai", text: t("autoReply") },
+        { id: Date.now() + 1, from: "ai", text: data.text || t("autoReply") },
       ]);
-    }, 1400);
+    } catch (error) {
+      console.error("Chat Error:", error);
+      setMessages((prev) => [
+        ...prev,
+        { id: Date.now() + 1, from: "ai", text: t("error") },
+      ]);
+    } finally {
+      setIsTyping(false);
+    }
   };
 
   return (

@@ -220,6 +220,7 @@
     "status": "Çevrimiçi · Yardıma hazır",
     "greeting": "Merhaba! 👋 Ben Qoodly Asistanı. Size bugün nasıl yardımcı olabilirim?",
     "placeholder": "Mesaj yazın...",
-    "autoReply": "Mesajınız için teşekkürler! Ekibimiz en kısa sürede size geri dönecektir. Acil durumlar için iletişim sayfamızdan bize ulaşabilirsiniz. 🚀"
+    "autoReply": "Mesajınız için teşekkürler! Ekibimiz en kısa sürede size geri dönecektir. Acil durumlar için iletişim sayfamızdan bize ulaşabilirsiniz. 🚀",
+    "error": "Bir hata oluştu, lütfen tekrar deneyin. ⚠️"
   }
 }

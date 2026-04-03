@@ -220,6 +220,7 @@
     "status": "Online · Bereit zu helfen",
     "greeting": "Hallo! 👋 Ich bin der Qoodly Assistent. Wie kann ich Ihnen heute helfen?",
     "placeholder": "Nachricht schreiben...",
-    "autoReply": "Danke für Ihre Nachricht! Unser Team wird sich bald bei Ihnen melden. Bei dringenden Anfragen erreichen Sie uns über die Kontaktseite. 🚀"
+    "autoReply": "Danke für Ihre Nachricht! Unser Team wird sich bald bei Ihnen melden. Bei dringenden Anfragen erreichen Sie uns über die Kontaktseite. 🚀",
+    "error": "Etwas ist schief gelaufen, bitte versuchen Sie es erneut. ⚠️"
   }
 }

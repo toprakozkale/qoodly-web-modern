@@ -176,7 +176,7 @@ export default async function LocaleLayout({
             {children}
             <Footer />
             <CookieConsent />
-            {/* <FloatingAssistantWrapper /> */}
+            <FloatingAssistantWrapper />
           </SmoothScrollProvider>
         </NextIntlClientProvider>
       </body>
