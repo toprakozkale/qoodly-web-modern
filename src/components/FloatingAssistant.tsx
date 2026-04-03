@@ -20,6 +20,7 @@ export function FloatingAssistant() {
   const panelRef    = useRef<HTMLDivElement>(null); // morphing chat panel
   const contentRef  = useRef<HTMLDivElement>(null); // chat content inside panel
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const messagesScrollRef = useRef<HTMLDivElement>(null);
   const isAnimating = useRef(false);
 
   const [isOpen, setIsOpen]   = useState(false);
@@ -82,6 +83,8 @@ export function FloatingAssistant() {
       0.45
     );
     tl.call(() => setIsOpen(true), [], 0.1);
+    // Focus the scroll container so mouse wheel goes to chat, not page
+    tl.call(() => messagesScrollRef.current?.focus(), [], 0.6);
   };
 
   const closeChat = () => {
@@ -200,7 +203,7 @@ export function FloatingAssistant() {
         }}
       >
         {/* Chat content (fades in after morph) */}
-        <div ref={contentRef} className="flex flex-col h-full opacity-0">
+        <div ref={contentRef} className="flex flex-col h-full min-h-0 opacity-0">
 
           {/* Header */}
           <div
@@ -231,8 +234,11 @@ export function FloatingAssistant() {
           </div>
 
           {/* Messages */}
-          <div className="flex-1 overflow-y-auto px-4 py-3 flex flex-col gap-3"
-            style={{ scrollbarWidth: "none" }}
+          <div
+            ref={messagesScrollRef}
+            tabIndex={-1}
+            className="flex-1 min-h-0 overflow-y-auto px-4 py-3 flex flex-col gap-3 outline-none"
+            style={{ scrollbarWidth: "none", overscrollBehavior: "contain" }}
           >
             {messages.map((msg) => (
               <div key={msg.id} className={`flex gap-2 ${msg.from === "user" ? "justify-end" : "justify-start"}`}>
