@@ -251,16 +251,6 @@ export function HeroSection() {
           <span className="text-4xl text-white/60">{`}`}</span>
         </div>
 
-        {/* CTA Button */}
-        <a
-          href="#get-started"
-          className="group flex items-center gap-3 px-6 py-3 border border-[#88ce02] rounded-full text-white hover:bg-[#88ce02]/10 transition-all"
-        >
-          <span className="text-sm font-medium">{t("cta")}</span>
-          <svg className="w-4 h-4 group-hover:translate-y-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 5v14m0 0l-7-7m7 7l7-7" />
-          </svg>
-        </a>
       </div>
     </section>
   );

@@ -46,6 +46,7 @@ export function CookieConsent() {
     if (!drawer || !overlay) return;
 
     localStorage.setItem("qoodly_cookie_consent", accepted ? "accepted" : "declined");
+    window.dispatchEvent(new Event("qoodly:cookie-dismissed"));
 
     gsap.to(drawer, { y: "100%", opacity: 0, duration: 0.5, ease: "power4.in" });
     gsap.to(overlay, {
