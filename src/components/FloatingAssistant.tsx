@@ -208,13 +208,35 @@ export function FloatingAssistant() {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, isTyping]);
 
+  // Klavye açılınca container'ı yukarı kaydır
+  useEffect(() => {
+    if (!isOpen) return;
+    const vv = window.visualViewport;
+    if (!vv) return;
+
+    const handleViewport = () => {
+      const keyboardH = window.innerHeight - vv.height;
+      gsap.set(entryRef.current, { bottom: Math.max(32, keyboardH + 8) });
+    };
+
+    vv.addEventListener("resize", handleViewport);
+    return () => {
+      vv.removeEventListener("resize", handleViewport);
+      gsap.set(entryRef.current, { bottom: 32 });
+    };
+  }, [isOpen]);
+
+  const getPanelDimensions = () => {
+    const w = Math.min(340, window.innerWidth - 24);
+    const h = Math.min(460, window.innerHeight - 120);
+    return { w, h };
+  };
 
   const openChat = () => {
     if (isAnimating.current || isOpen) return;
     isAnimating.current = true;
 
-    const panelW = Math.min(340, window.innerWidth - 24);
-    const panelH = Math.min(460, window.innerHeight - 120);
+    const { w: panelW, h: panelH } = getPanelDimensions();
 
     // Pre-set panel: full size, anchored bottom-right, invisible
     gsap.set(panelRef.current, {
