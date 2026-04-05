@@ -141,6 +141,7 @@ export function FloatingAssistant() {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const messagesScrollRef = useRef<HTMLDivElement>(null);
   const isAnimating = useRef(false);
+  const initialVVHeight = useRef<number>(0);
 
   const [isOpen, setIsOpen]   = useState(false);
   const [input, setInput]     = useState("");
@@ -151,6 +152,11 @@ export function FloatingAssistant() {
   useEffect(() => {
     setMessages([{ id: 0, from: "ai", text: t("greeting") }]);
   }, [t]);
+
+  // Başlangıç viewport yüksekliğini kaydet (klavye açılmadan önceki değer)
+  useEffect(() => {
+    initialVVHeight.current = window.visualViewport?.height ?? window.innerHeight;
+  }, []);
 
   // Entry + pulse + tooltip — cookie consent sonrası başlar
   useEffect(() => {
@@ -215,7 +221,9 @@ export function FloatingAssistant() {
     if (!vv) return;
 
     const handleViewport = () => {
-      const keyboardH = window.innerHeight - vv.height;
+      // initialVVHeight kullan — Safari'de window.innerHeight sabit kalır,
+      // Chrome'da değişir. İkisinde de initialVVHeight doğru referans noktası.
+      const keyboardH = initialVVHeight.current - vv.height;
       gsap.set(entryRef.current, { bottom: Math.max(32, keyboardH + 8) });
       // Panel yüksekliğini kalan alana sığdır (min 220px)
       gsap.set(panelRef.current, { height: Math.max(220, vv.height - 16) });
