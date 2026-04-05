@@ -217,12 +217,17 @@ export function FloatingAssistant() {
     const handleViewport = () => {
       const keyboardH = window.innerHeight - vv.height;
       gsap.set(entryRef.current, { bottom: Math.max(32, keyboardH + 8) });
+      // Panel yüksekliğini kalan alana sığdır (min 220px)
+      gsap.set(panelRef.current, { height: Math.max(220, vv.height - 16) });
     };
 
     vv.addEventListener("resize", handleViewport);
     return () => {
       vv.removeEventListener("resize", handleViewport);
       gsap.set(entryRef.current, { bottom: 32 });
+      // Panel yüksekliğini normal haline döndür
+      const { h } = getPanelDimensions();
+      gsap.set(panelRef.current, { height: h });
     };
   }, [isOpen]);
 
@@ -552,12 +557,13 @@ export function FloatingAssistant() {
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && handleSend()}
               placeholder={t("placeholder")}
-              className="flex-1 text-sm text-white placeholder-white/25 outline-none bg-transparent"
+              className="flex-1 text-white placeholder-white/25 outline-none bg-transparent"
               style={{
                 background: "rgba(255,255,255,0.05)",
                 border: "1px solid rgba(255,255,255,0.08)",
                 borderRadius: 12,
                 padding: "8px 12px",
+                fontSize: 16,
               }}
             />
             <button
