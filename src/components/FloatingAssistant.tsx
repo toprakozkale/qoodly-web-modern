@@ -142,9 +142,14 @@ export function FloatingAssistant() {
   const messagesScrollRef = useRef<HTMLDivElement>(null);
   const isAnimating = useRef(false);
   const initialVVHeight = useRef<number>(0);
-  const savedScrollY = useRef<number>(0);
+  const mobileWrapperRef = useRef<HTMLDivElement>(null);
+  const mobileSheetRef  = useRef<HTMLDivElement>(null);
+  const mobileOverlayRef = useRef<HTMLDivElement>(null);
+  const touchStartY    = useRef<number>(0);
+  const touchStartTime = useRef<number>(0);
 
   const [isOpen, setIsOpen]   = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const [input, setInput]     = useState("");
   const [messages, setMessages] = useState<Message[]>([]);
   const [isTyping, setIsTyping] = useState(false);
@@ -159,22 +164,13 @@ export function FloatingAssistant() {
     initialVVHeight.current = window.visualViewport?.height ?? window.innerHeight;
   }, []);
 
-  // Chat açıkken body scroll'u kilitle — klavye açılınca sayfa kaymasın
+  // Mobil tespiti
   useEffect(() => {
-    if (isOpen) {
-      savedScrollY.current = window.scrollY;
-      document.body.style.position = "fixed";
-      document.body.style.top = `-${savedScrollY.current}px`;
-      document.body.style.width = "100%";
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.position = "";
-      document.body.style.top = "";
-      document.body.style.width = "";
-      document.body.style.overflow = "";
-      window.scrollTo(0, savedScrollY.current);
-    }
-  }, [isOpen]);
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
 
   // Entry + pulse + tooltip — cookie consent sonrası başlar
   useEffect(() => {
@@ -232,9 +228,9 @@ export function FloatingAssistant() {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, isTyping]);
 
-  // Klavye açılınca container'ı yukarı kaydır
+  // Klavye açılınca container'ı yukarı kaydır (sadece desktop)
   useEffect(() => {
-    if (!isOpen) return;
+    if (!isOpen || isMobile) return;
     const vv = window.visualViewport;
     if (!vv) return;
 
@@ -254,7 +250,7 @@ export function FloatingAssistant() {
       const { h } = getPanelDimensions();
       gsap.set(panelRef.current, { height: h });
     };
-  }, [isOpen]);
+  }, [isOpen, isMobile]);
 
   const getPanelDimensions = () => {
     const w = Math.min(340, window.innerWidth - 24);
@@ -265,6 +261,20 @@ export function FloatingAssistant() {
   const openChat = () => {
     if (isAnimating.current || isOpen) return;
     isAnimating.current = true;
+
+    // Mobil: iOS bottom sheet aç
+    if (isMobile) {
+      setIsOpen(true);
+      gsap.set(mobileWrapperRef.current, { visibility: "visible" });
+      gsap.set(mobileOverlayRef.current, { opacity: 0 });
+      gsap.set(mobileSheetRef.current, { y: "100%" });
+      const tl = gsap.timeline({ onComplete: () => { isAnimating.current = false; } });
+      tl.to(pulseRef.current, { opacity: 0, scale: 0.8, duration: 0.1 }, 0);
+      tl.to(avatarRef.current, { scale: 0, opacity: 0, duration: 0.2, ease: "power3.in" }, 0);
+      tl.to(mobileOverlayRef.current, { opacity: 1, duration: 0.35 }, 0.05);
+      tl.to(mobileSheetRef.current, { y: 0, duration: 0.42, ease: "power3.out" }, 0.08);
+      return;
+    }
 
     const { w: panelW, h: panelH } = getPanelDimensions();
 
@@ -314,6 +324,24 @@ export function FloatingAssistant() {
     if (isAnimating.current || !isOpen) return;
     isAnimating.current = true;
 
+    // Mobil: iOS sheet'i kapat
+    if (isMobile) {
+      const tl = gsap.timeline({ onComplete: () => { isAnimating.current = false; } });
+      tl.to(mobileSheetRef.current, { y: "100%", duration: 0.34, ease: "power3.in" }, 0);
+      tl.to(mobileOverlayRef.current, { opacity: 0, duration: 0.3 }, 0);
+      tl.call(() => {
+        gsap.set(mobileWrapperRef.current, { visibility: "hidden" });
+        setIsOpen(false);
+      }, [], 0.34);
+      tl.fromTo(avatarRef.current,
+        { scale: 0, opacity: 0 },
+        { scale: 1, opacity: 1, duration: 0.28, ease: "back.out(2)" },
+        0.32
+      );
+      tl.to(pulseRef.current, { opacity: 0.5, scale: 1, duration: 0.2 }, 0.48);
+      return;
+    }
+
     const tl = gsap.timeline({
       onComplete: () => { isAnimating.current = false; },
     });
@@ -347,6 +375,30 @@ export function FloatingAssistant() {
     // 5. Pulse resumes
     tl.to(pulseRef.current, { opacity: 0.5, scale: 1, duration: 0.2 }, 0.45);
   };
+
+  // ── Drag-to-dismiss handlers ──
+  const handleDragStart = (e: React.TouchEvent) => {
+    touchStartY.current = e.touches[0].clientY;
+    touchStartTime.current = Date.now();
+  };
+  const handleDragMove = (e: React.TouchEvent) => {
+    const dy = e.touches[0].clientY - touchStartY.current;
+    if (dy > 0) {
+      gsap.set(mobileSheetRef.current, { y: dy });
+      gsap.set(mobileOverlayRef.current, { opacity: Math.max(0, 1 - dy / 300) });
+    }
+  };
+  const handleDragEnd = (e: React.TouchEvent) => {
+    const dy = e.changedTouches[0].clientY - touchStartY.current;
+    const velocity = dy / (Date.now() - touchStartTime.current);
+    if (dy > 120 || velocity > 0.5) {
+      closeChat();
+    } else {
+      gsap.to(mobileSheetRef.current, { y: 0, duration: 0.3, ease: "power3.out" });
+      gsap.to(mobileOverlayRef.current, { opacity: 1, duration: 0.3 });
+    }
+  };
+
   const handleSend = async () => {
     const trimmed = input.trim();
     if (!trimmed || isTyping) return;
@@ -386,8 +438,164 @@ export function FloatingAssistant() {
 
   return (
     <>
-      {/* Invisible overlay — click outside to close */}
-      {isOpen && (
+      {/* ── Mobile iOS Bottom Sheet ── */}
+      <div
+        ref={mobileWrapperRef}
+        style={{ position: "fixed", inset: 0, zIndex: 9999, visibility: "hidden" }}
+      >
+        {/* Dim overlay — tap to close */}
+        <div
+          ref={mobileOverlayRef}
+          style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.55)", opacity: 0 }}
+          onClick={closeChat}
+        />
+
+        {/* Sheet */}
+        <div
+          ref={mobileSheetRef}
+          className="flex flex-col absolute bottom-0 left-0 right-0"
+          style={{
+            height: "92%",
+            borderRadius: "20px 20px 0 0",
+            background: "linear-gradient(160deg, #0f0f14 0%, #0a0a0f 100%)",
+            boxShadow: "0 -8px 48px rgba(0,0,0,0.6)",
+            transform: "translateY(100%)",
+          }}
+        >
+          {/* Drag Handle */}
+          <div
+            className="flex justify-center pt-3 pb-1 shrink-0 touch-none"
+            onTouchStart={handleDragStart}
+            onTouchMove={handleDragMove}
+            onTouchEnd={handleDragEnd}
+          >
+            <div style={{ width: 36, height: 4, borderRadius: 2, background: "rgba(255,255,255,0.18)" }} />
+          </div>
+
+          {/* Header */}
+          <div
+            className="flex items-center gap-3 px-4 py-3 shrink-0"
+            style={{
+              borderBottom: "1px solid rgba(255,255,255,0.08)",
+              background: "rgba(136,206,2,0.04)",
+            }}
+          >
+            <div className="relative w-9 h-9 rounded-full overflow-hidden shrink-0">
+              <Image src="/asistant.webp" alt="AI" fill className="object-contain" />
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-sm font-semibold text-white leading-none">{t("name")}</p>
+              <div className="flex items-center gap-1.5 mt-0.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#88ce02] inline-block" />
+                <p className="text-xs text-[#88ce02]">{t("status")}</p>
+              </div>
+            </div>
+            <button
+              onClick={closeChat}
+              className="text-white/30 hover:text-white/70 transition-colors p-2 rounded-xl hover:bg-white/5"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+
+          {/* Messages */}
+          <div
+            className="flex-1 min-h-0 overflow-y-auto px-4 py-3 flex flex-col gap-3"
+            style={{ overscrollBehavior: "contain" }}
+          >
+            {messages.map((msg) => (
+              <div key={msg.id} className={`flex gap-2 ${msg.from === "user" ? "justify-end" : "justify-start"}`}>
+                {msg.from === "ai" && (
+                  <div className="relative w-6 h-6 rounded-full overflow-hidden shrink-0 mt-0.5">
+                    <Image src="/asistant.webp" alt="AI" fill className="object-contain" />
+                  </div>
+                )}
+                <div
+                  className="max-w-[78%] px-3 py-2 text-sm leading-relaxed min-w-0"
+                  style={msg.from === "user" ? {
+                    background: "linear-gradient(135deg, #88ce02, #5a9900)",
+                    color: "#0a0a0a",
+                    borderRadius: "16px 16px 4px 16px",
+                    fontWeight: 500,
+                    wordBreak: "break-word",
+                    overflowWrap: "anywhere",
+                  } : {
+                    background: "rgba(255,255,255,0.06)",
+                    color: "#e8e8e8",
+                    borderRadius: "4px 16px 16px 16px",
+                    border: "1px solid rgba(255,255,255,0.07)",
+                    wordBreak: "break-word",
+                    overflowWrap: "anywhere",
+                  }}
+                >
+                  {renderMessageText(msg.text)}
+                </div>
+              </div>
+            ))}
+            {isTyping && (
+              <div className="flex gap-2 justify-start">
+                <div className="relative w-6 h-6 rounded-full overflow-hidden shrink-0 mt-0.5">
+                  <Image src="/asistant.webp" alt="AI" fill className="object-contain" />
+                </div>
+                <div className="px-4 py-3 flex gap-1 items-center"
+                  style={{
+                    background: "rgba(255,255,255,0.06)",
+                    border: "1px solid rgba(255,255,255,0.07)",
+                    borderRadius: "4px 16px 16px 16px",
+                  }}
+                >
+                  {[0, 1, 2].map((i) => (
+                    <span key={i} className="w-1.5 h-1.5 rounded-full bg-[#88ce02]/60 animate-bounce"
+                      style={{ animationDelay: `${i * 0.15}s` }}
+                    />
+                  ))}
+                </div>
+              </div>
+            )}
+            <div ref={messagesEndRef} />
+          </div>
+
+          {/* Input */}
+          <div
+            className="px-3 pt-2 shrink-0 flex gap-2 items-center"
+            style={{
+              borderTop: "1px solid rgba(255,255,255,0.06)",
+              paddingBottom: "max(16px, env(safe-area-inset-bottom))",
+            }}
+          >
+            <input
+              type="text"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && handleSend()}
+              placeholder={t("placeholder")}
+              className="flex-1 text-white placeholder-white/25 outline-none bg-transparent"
+              style={{
+                background: "rgba(255,255,255,0.05)",
+                border: "1px solid rgba(255,255,255,0.08)",
+                borderRadius: 12,
+                padding: "10px 14px",
+                fontSize: 16,
+              }}
+            />
+            <button
+              onClick={handleSend}
+              disabled={!input.trim()}
+              className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 transition-all disabled:opacity-25 active:scale-95"
+              style={{ background: "linear-gradient(135deg, #88ce02, #5a9900)" }}
+            >
+              <svg className="w-4 h-4 -rotate-45" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 19V5m0 0l-7 7m7-7l7 7" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Invisible overlay — click outside to close (desktop only) */}
+      {isOpen && !isMobile && (
         <div
           className="fixed inset-0 z-40"
           onClick={closeChat}
@@ -581,7 +789,6 @@ export function FloatingAssistant() {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && handleSend()}
-              onFocus={() => { setTimeout(() => window.scrollTo(0, 0), 50); }}
               placeholder={t("placeholder")}
               className="flex-1 text-white placeholder-white/25 outline-none bg-transparent"
               style={{
