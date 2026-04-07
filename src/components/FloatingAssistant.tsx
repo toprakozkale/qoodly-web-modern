@@ -142,6 +142,7 @@ export function FloatingAssistant() {
   const messagesScrollRef = useRef<HTMLDivElement>(null);
   const isAnimating = useRef(false);
   const initialVVHeight = useRef<number>(0);
+  const savedScrollY = useRef<number>(0);
 
   const [isOpen, setIsOpen]   = useState(false);
   const [input, setInput]     = useState("");
@@ -157,6 +158,23 @@ export function FloatingAssistant() {
   useEffect(() => {
     initialVVHeight.current = window.visualViewport?.height ?? window.innerHeight;
   }, []);
+
+  // Chat açıkken body scroll'u kilitle — klavye açılınca sayfa kaymasın
+  useEffect(() => {
+    if (isOpen) {
+      savedScrollY.current = window.scrollY;
+      document.body.style.position = "fixed";
+      document.body.style.top = `-${savedScrollY.current}px`;
+      document.body.style.width = "100%";
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.width = "";
+      document.body.style.overflow = "";
+      window.scrollTo(0, savedScrollY.current);
+    }
+  }, [isOpen]);
 
   // Entry + pulse + tooltip — cookie consent sonrası başlar
   useEffect(() => {
@@ -221,9 +239,8 @@ export function FloatingAssistant() {
     if (!vv) return;
 
     const handleViewport = () => {
-      // initialVVHeight kullan — Safari'de window.innerHeight sabit kalır,
-      // Chrome'da değişir. İkisinde de initialVVHeight doğru referans noktası.
-      const keyboardH = initialVVHeight.current - vv.height;
+      // offsetTop'u da hesaba kat — iOS Safari layout viewport'u kaydırabilir
+      const keyboardH = window.innerHeight - vv.offsetTop - vv.height;
       gsap.set(entryRef.current, { bottom: Math.max(32, keyboardH + 8) });
       // Panel yüksekliğini kalan alana sığdır (min 220px)
       gsap.set(panelRef.current, { height: Math.max(220, vv.height - 16) });
@@ -564,6 +581,7 @@ export function FloatingAssistant() {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && handleSend()}
+              onFocus={() => { setTimeout(() => window.scrollTo(0, 0), 50); }}
               placeholder={t("placeholder")}
               className="flex-1 text-white placeholder-white/25 outline-none bg-transparent"
               style={{
