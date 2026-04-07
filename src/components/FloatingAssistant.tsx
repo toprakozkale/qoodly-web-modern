@@ -172,6 +172,22 @@ export function FloatingAssistant() {
     return () => window.removeEventListener("resize", check);
   }, []);
 
+  // Mobil sheet açıkken sayfa scroll'unu kilitle
+  useEffect(() => {
+    if (!isMobile) return;
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+      document.body.style.touchAction = "none";
+    } else {
+      document.body.style.overflow = "";
+      document.body.style.touchAction = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+      document.body.style.touchAction = "";
+    };
+  }, [isOpen, isMobile]);
+
   // Entry + pulse + tooltip — cookie consent sonrası başlar
   useEffect(() => {
     const entry = entryRef.current;
@@ -249,6 +265,29 @@ export function FloatingAssistant() {
       // Panel yüksekliğini normal haline döndür
       const { h } = getPanelDimensions();
       gsap.set(panelRef.current, { height: h });
+    };
+  }, [isOpen, isMobile]);
+
+  // Mobil sheet: klavye açılınca wrapper'ı visual viewport'a sabitle
+  useEffect(() => {
+    if (!isOpen || !isMobile) return;
+    const vv = window.visualViewport;
+    if (!vv) return;
+
+    const update = () => {
+      gsap.set(mobileWrapperRef.current, {
+        top: vv.offsetTop,
+        height: vv.height,
+      });
+    };
+
+    update();
+    vv.addEventListener("resize", update);
+    vv.addEventListener("scroll", update);
+    return () => {
+      vv.removeEventListener("resize", update);
+      vv.removeEventListener("scroll", update);
+      gsap.set(mobileWrapperRef.current, { top: 0, height: "100%" });
     };
   }, [isOpen, isMobile]);
 
@@ -441,7 +480,7 @@ export function FloatingAssistant() {
       {/* ── Mobile iOS Bottom Sheet ── */}
       <div
         ref={mobileWrapperRef}
-        style={{ position: "fixed", inset: 0, zIndex: 9999, visibility: "hidden" }}
+        style={{ position: "fixed", top: 0, left: 0, right: 0, height: "100%", zIndex: 9999, visibility: "hidden" }}
       >
         {/* Dim overlay — tap to close */}
         <div
