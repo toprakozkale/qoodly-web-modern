@@ -32,6 +32,14 @@ const teamData = [
     roleColor: "#ff8c42",
     gradient: "from-[#ff8c42] to-[#ff6b9d]",
   },
+  {
+    initials: "ŞND",
+    name: "Şevval Neva Durmuş",
+    roleKey: "member4Role" as const,
+    descKey: "member4Description" as const,
+    roleColor: "#c084fc",
+    gradient: "from-[#c084fc] to-[#818cf8]",
+  },
 ];
 
 const tagColors = [
@@ -109,7 +117,7 @@ export function AboutTeamSection() {
       </div>
 
       {/* Cards Grid */}
-      <div className="cards-grid grid md:grid-cols-3 gap-8 mt-16">
+      <div className="cards-grid grid sm:grid-cols-2 lg:grid-cols-4 gap-8 mt-16">
         {teamData.map((member) => (
           <div
             key={member.name}

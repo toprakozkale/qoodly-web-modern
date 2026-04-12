@@ -63,8 +63,10 @@
     "tool2Description": "Veri akışlarını düzenliyor ve dijital bağlantı altyapısını kuruyor.",
     "tool3Title": "Furkan Bozdaş - AI Entegratör",
     "tool3Description": "Yapay zeka servislerini iş akışınıza entegre ediyor.",
-    "tool4Title": "Ve birlikte fikirler inşa ediyoruz.",
-    "tool4Description": "Birlikte çalışmaya başlamak için herhangi birimize ulaşabilirsiniz."
+    "tool4Title": "Şevval Neva Durmuş - UI Mimarı",
+    "tool4Description": "Kullanıcı arayüzlerini çık sanatı ve hassasiyetle tasarlıyor.",
+    "tool5Title": "Ve birlikte fikirler inşa ediyoruz.",
+    "tool5Description": "Birlikte çalışmaya başlamak için herhangi birimize ulaşabilirsiniz."
   },
   "showcase": {
     "title": "Vitrin",
@@ -136,6 +138,8 @@
     "member2Description": "Veri akışlarını düzenliyor ve dijital bağlantı altyapısını inşa ediyor.",
     "member3Role": "AI Entegratör",
     "member3Description": "Son teknoloji AI servislerini müşteri iş akışlarına sorunsuz biçimde entegre ediyor.",
+    "member4Role": "UI Mimarı",
+    "member4Description": "Kullanıcı arayüzü mimarisini tasarlayarak estetik ve fonksiyonelliği bir arada sunuyor.",
     "valuesTags": "Temel,Değerlerimiz,!",
     "valuesIntro": "Pek çok yazılım firması yalnızca kod yazarken biz somut iş sonuçları sunuyoruz. Teknik mükemmeliyeti müşteri odaklı bir yaklaşımla harmanlıyoruz.",
     "value1Title": "Önce Yenilik",
@@ -158,7 +162,7 @@
     "faq2q": "Qoodly ne zamandan bu yana faaliyet gösteriyor?",
     "faq2a": "Qoodly, 2024 yılında kuruldu. Bu süre zarfında mobil uygulamalar, kurumsal web platformları ve yapay zeka destekli çözümleri kapsayan 10'dan fazla projeyi teslim ettik. Genç bir stüdyo olmamıza karşın ekibimiz, her işe yıllar süren birleşik profesyonel deneyimle yaklaşmaktadır.",
     "faq3q": "Qoodly'nin arkasında kimler var?",
-    "faq3a": "Qoodly, odaklanmış ve kıdemli bir ekip tarafından oluşturulmuştur. Toprak Özkale, Full Stack Developer ve sistem mimarı olarak ekibe liderlik etmektedir; Eren Öz arka uç altyapısını ve veri akışlarını yönetmektedir; Furkan Bozdaş ise müşteri ürünlerine son teknoloji AI servislerini entegre etme konusunda uzmanlaşmıştır. Birlikte ekibi sade, çıktıyı yüksek kaliteli tutuyoruz.",
+    "faq3a": "Qoodly, odaklanmış ve kıdemli bir ekip tarafından oluşturulmuştur. Toprak Özkale, Full Stack Developer ve sistem mimarı olarak ekibe liderlik etmektedir; Eren Öz arka uç altyapısını ve veri akışlarını yönetmektedir; Furkan Bozdaş müşteri ürünlerine son teknoloji AI servislerini entegre etme konusunda uzmanlaşmıştır; Şevval Neva Durmuş ise UI mimarı olarak arayüz tasarımının estetik ve fonksiyonel yönlerini yönetmektedir. Birlikte ekibi sade, çıktıyı yüksek kaliteli tutuyoruz.",
     "faq4q": "Qoodly şimdiye kadar hangi projeleri teslim etti?",
     "faq4a": "Portföyümüzde Weekweeky — bir mobil haftalık planlama uygulaması, GFS Global Engineering'in şirketin dijital varlığını yöneten kurumsal CMS'i ve geliştirme aşamasındaki yapay zeka destekli bir e-ticaret çözümü yer almaktadır. Mobil, web ve akıllı sistemler alanlarında çalışıyoruz.",
     "faq5q": "Qoodly yeni bir projeye nasıl yaklaşıyor?",

@@ -41,6 +41,7 @@ Ekibimiz:
 - Toprak Özkale: Full Stack Developer & Sistem Mimarı. Ekibe liderlik ediyor, temel algoritmaları tasarlıyor.
 - Eren Öz: Backend Developer. Veri akışlarını düzenliyor, dijital bağlantı altyapısını kuruyor.
 - Furkan Bozdaş: AI Entegratör. Yapay zeka servislerini iş akışlarına entegre ediyor.
+- Şevval Neva Durmuş: UI Mimarı. Kullanıcı arayüzü mimarisini tasarlıyor, estetik ve fonksiyonelliği bir arada sunuyor.
 
 Projelerimiz:
 - Weekweeky: Haftalık planlamayı kolaylaştıran mobil uygulama. Web: https://www.weekweeky.com

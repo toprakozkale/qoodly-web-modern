@@ -63,8 +63,10 @@
     "tool2Description": "Streamlining data and building digital connectivity.",
     "tool3Title": "Furkan Bozdaş - AI Integrator",
     "tool3Description": "Integrating Artificial Intelligence services into your workflow.",
-    "tool4Title": "and Together, we build ideas.",
-    "tool4Description": "Simply reach out to any of us to start working together."
+    "tool4Title": "Şevval Neva Durmuş - UI Architect",
+    "tool4Description": "Designing user interfaces with craft and precision.",
+    "tool5Title": "and Together, we build ideas.",
+    "tool5Description": "Simply reach out to any of us to start working together."
   },
   "showcase": {
     "title": "Showcase",
@@ -136,6 +138,8 @@
     "member2Description": "Streamlining data pipelines and building the digital connectivity infrastructure.",
     "member3Role": "AI Integrator",
     "member3Description": "Integrating cutting-edge AI services seamlessly into client workflows.",
+    "member4Role": "UI Architect",
+    "member4Description": "Designing intuitive user interface architecture that harmonises aesthetics with functionality.",
     "valuesTags": "Our,Core,Values",
     "valuesIntro": "While many software firms simply write code, we deliver tangible business results. We blend technical excellence with a customer-centric approach.",
     "value1Title": "Innovation First",
@@ -158,7 +162,7 @@
     "faq2q": "How long has Qoodly been operating?",
     "faq2a": "Qoodly was established in 2024. In that time we have delivered 10+ projects spanning mobile apps, corporate web platforms, and AI-powered solutions. Despite being a young studio, our team brings years of combined professional experience to every engagement.",
     "faq3q": "Who is behind Qoodly?",
-    "faq3a": "Qoodly is built by a focused, senior-level team. Toprak Özkale leads as Full Stack Developer and system architect, Eren Öz drives backend infrastructure and data pipelines, and Furkan Bozdaş specialises in integrating cutting-edge AI services into client products. Together we keep the team lean and the output high-quality.",
+    "faq3a": "Qoodly is built by a focused, senior-level team. Toprak Özkale leads as Full Stack Developer and system architect, Eren Öz drives backend infrastructure and data pipelines, Furkan Bozdaş specialises in integrating cutting-edge AI services into client products, and Şevval Neva Durmuş serves as UI Architect shaping the aesthetic and functional dimensions of our interfaces. Together we keep the team lean and the output high-quality.",
     "faq4q": "What kinds of projects has Qoodly already shipped?",
     "faq4a": "Our portfolio includes Weekweeky — a mobile weekly planning application, GFS Global Engineering's corporate CMS which manages the company's digital presence, and an AI-powered e-commerce solution currently in development. We work across mobile, web, and intelligent systems.",
     "faq5q": "How does Qoodly approach a new project?",

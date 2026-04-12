@@ -54,6 +54,11 @@ function TeamSchema() {
       jobTitle: "AI Integrator",
       url: "https://www.linkedin.com/in/furkan-bozdaş-915576177/",
     },
+    {
+      name: "Şevval Neva Durmuş",
+      jobTitle: "UI Architect",
+      url: "https://www.linkedin.com/",
+    },
   ];
 
   const schemas = team.map((person) => ({
