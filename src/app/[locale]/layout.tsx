@@ -123,7 +123,10 @@ function GlobalSchema() {
         },
         sameAs: [
           "https://www.linkedin.com/company/qoodly/",
-          "https://www.instagram.com/qoodly.io",
+          "https://www.instagram.com/qoodlysoftware",
+          "https://www.tiktok.com/@qoodlysoftware",
+          "https://www.youtube.com/channel/UCYUx2JTVwHCTfykC3pQwboQ",
+          "https://www.facebook.com/share/18SrTPMaRg/",
         ],
       },
       {

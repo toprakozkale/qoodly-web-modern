@@ -75,6 +75,7 @@
     "item2Tags": "Инжиниринг,Промышленность,Решения",
     "item3Subtitle": "Кейс-стади",
     "item3Tags": "Проектируем,Разрабатываем,Поставляем",
+    "item4Tags": "Арендуй,авто,Путешествуй,безопасно",
     "reviewSite": "Открыть"
   },
   "brands": {
@@ -94,6 +95,9 @@
     "linkLinkedIn": "LinkedIn",
     "linkPhone": "Телефон",
     "linkWhatsApp": "WhatsApp",
+    "linkTikTok": "TikTok",
+    "linkYouTube": "YouTube",
+    "linkFacebook": "Facebook",
     "copyright": "©2024 Qoodly – Все права защищены.",
     "privacyPolicy": "Политика конфиденциальности",
     "termsOfUse": "Условия использования"

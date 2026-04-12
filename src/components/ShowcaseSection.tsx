@@ -13,10 +13,13 @@ export function ShowcaseSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const carouselRef = useRef<HTMLDivElement>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const touchStartX = useRef<number>(0);
+  const touchEndX = useRef<number>(0);
 
   const item1Tags = t("item1Tags").split(",");
   const item2Tags = t("item2Tags").split(",");
   const item3Tags = t("item3Tags").split(",");
+  const item4Tags = t("item4Tags").split(",");
 
   const showcases = [
     {
@@ -75,6 +78,25 @@ export function ShowcaseSection() {
     },
     {
       id: 3,
+      image: (
+        <div className="w-full h-full flex items-center justify-center py-8 px-4" style={{ background: "linear-gradient(135deg, #fef9c3 0%, #fde68a 100%)" }}>
+          <div className="text-center w-full">
+            <div className="w-24 h-24 md:w-36 md:h-36 mx-auto mb-3 md:mb-4 rounded-lg overflow-hidden">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/logo-rotabosna.png" alt="Rotabosna" className="w-full h-full object-contain" />
+            </div>
+            <div className="text-3xl md:text-5xl lg:text-6xl font-black text-black mb-3 md:mb-4">Rotabosna</div>
+            <div className="flex flex-wrap items-center justify-center gap-2 md:gap-4">
+              {item4Tags.map((tag) => (
+                <span key={tag} className="px-3 py-1.5 md:px-4 md:py-2 bg-white/20 rounded-full text-black text-xs md:text-sm font-medium">{tag}</span>
+              ))}
+            </div>
+          </div>
+        </div>
+      ),
+    },
+    {
+      id: 4,
       image: (
         <div className="w-full h-full bg-linear-to-br from-[#ff8c42] to-[#88ce02] flex items-center justify-center py-8 px-4">
           <div className="text-center w-full">
@@ -144,6 +166,19 @@ export function ShowcaseSection() {
     setCurrentIndex((prev) => (prev - 1 + showcases.length) % showcases.length);
   };
 
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    touchEndX.current = e.changedTouches[0].clientX;
+    const diff = touchStartX.current - touchEndX.current;
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) nextSlide();
+      else prevSlide();
+    }
+  };
+
   return (
     <section ref={sectionRef} className="relative py-20 px-4 md:px-12" id="showcase">
       {/* Title */}
@@ -151,7 +186,12 @@ export function ShowcaseSection() {
 
       {/* Carousel */}
       <div className="carousel-container relative">
-        <div ref={carouselRef} className="flex gap-6 overflow-hidden">
+        <div
+          ref={carouselRef}
+          className="flex gap-6 overflow-hidden"
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+        >
           {showcases.map((showcase, index) => {
             const isActive = index === currentIndex;
 

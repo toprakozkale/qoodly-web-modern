@@ -75,6 +75,7 @@
     "item2Tags": "Engineering,Industrie,Lösungen",
     "item3Subtitle": "Fallstudien",
     "item3Tags": "Designen,Entwickeln,Liefern",
+    "item4Tags": "Fahrzeug,mieten,Sicher,reisen",
     "reviewSite": "Ansehen"
   },
   "brands": {
@@ -94,6 +95,9 @@
     "linkLinkedIn": "LinkedIn",
     "linkPhone": "Telefon",
     "linkWhatsApp": "WhatsApp",
+    "linkTikTok": "TikTok",
+    "linkYouTube": "YouTube",
+    "linkFacebook": "Facebook",
     "copyright": "©2024 Qoodly – Alle Rechte vorbehalten.",
     "privacyPolicy": "Datenschutzrichtlinie",
     "termsOfUse": "Nutzungsbedingungen"

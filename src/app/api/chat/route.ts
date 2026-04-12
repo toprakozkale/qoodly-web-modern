@@ -18,7 +18,10 @@ Qoodly Hakkında Temel Bilgiler:
 
 Sosyal Medya:
 - LinkedIn (Şirket): https://www.linkedin.com/company/qoodly/
-- Instagram: https://www.instagram.com/qoodly.io
+- Instagram: https://www.instagram.com/qoodlysoftware
+- TikTok: https://www.tiktok.com/@qoodlysoftware
+- YouTube: https://www.youtube.com/channel/UCYUx2JTVwHCTfykC3pQwboQ
+- Facebook: https://www.facebook.com/share/18SrTPMaRg/
 
 Site Sayfaları:
 - Ana Sayfa: https://qoodly.com
@@ -42,6 +45,7 @@ Ekibimiz:
 Projelerimiz:
 - Weekweeky: Haftalık planlamayı kolaylaştıran mobil uygulama. Web: https://www.weekweeky.com
 - GFS Kurumsal CMS: Büyük ölçekli kurumlar için güvenli ve ölçeklenebilir içerik yönetim platformu. Web: https://www.gfsglobalmakina.com
+- Rotabosna: Araç kiralama platformu. "Aracını kirala, Güvenle gez." (Site yakında)
 - E-Ticaret AI: Kullanıcı davranışlarını analiz eden kişiselleştirilmiş öneri sistemi (Yakında)
 
 Değerlerimiz:
@@ -55,7 +59,10 @@ Kullanabileceğin butonlar:
 - WhatsApp ile yaz → [BUTTON:WhatsApp:https://wa.me/905414201560]
 - E-posta gönder → [BUTTON:E-posta:mailto:info@qoodly.com]
 - LinkedIn'i ziyaret et → [BUTTON:LinkedIn:https://www.linkedin.com/company/qoodly/]
-- Instagram'ı ziyaret et → [BUTTON:Instagram:https://www.instagram.com/qoodly.io]
+- Instagram'ı ziyaret et → [BUTTON:Instagram:https://www.instagram.com/qoodlysoftware]
+- TikTok'u ziyaret et → [BUTTON:TikTok:https://www.tiktok.com/@qoodlysoftware]
+- YouTube'u ziyaret et → [BUTTON:YouTube:https://www.youtube.com/channel/UCYUx2JTVwHCTfykC3pQwboQ]
+- Facebook'u ziyaret et → [BUTTON:Facebook:https://www.facebook.com/share/18SrTPMaRg/]
 - Projelerimizi gör → [BUTTON:Projelerimiz:https://qoodly.com/work]
 - Hakkımızda → [BUTTON:Hakkımızda:https://qoodly.com/about]
 - İletişime geç → [BUTTON:İletişim:https://qoodly.com/contact]

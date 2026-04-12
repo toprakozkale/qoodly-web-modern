@@ -75,6 +75,7 @@
     "item2Tags": "Engineering,Industry,Solutions",
     "item3Subtitle": "Case Studies",
     "item3Tags": "Design,Develop,Deliver",
+    "item4Tags": "Rent,your,vehicle,Travel,safely",
     "reviewSite": "İncele"
   },
   "brands": {
@@ -94,6 +95,9 @@
     "linkLinkedIn": "LinkedIn",
     "linkPhone": "Phone",
     "linkWhatsApp": "WhatsApp",
+    "linkTikTok": "TikTok",
+    "linkYouTube": "YouTube",
+    "linkFacebook": "Facebook",
     "copyright": "©2024 Qoodly – All rights reserved.",
     "privacyPolicy": "Privacy Policy",
     "termsOfUse": "Terms of Use"

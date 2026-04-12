@@ -75,6 +75,7 @@
     "item2Tags": "Mühendislik,Sanayi,Çözümler",
     "item3Subtitle": "Vaka Çalışmaları",
     "item3Tags": "Tasarla,Geliştir,Teslim Et",
+    "item4Tags": "Aracını,kirala,Güvenle,gez",
     "reviewSite": "İncele"
   },
   "brands": {
@@ -94,6 +95,9 @@
     "linkLinkedIn": "LinkedIn",
     "linkPhone": "Telefon",
     "linkWhatsApp": "WhatsApp",
+    "linkTikTok": "TikTok",
+    "linkYouTube": "YouTube",
+    "linkFacebook": "Facebook",
     "copyright": "©2024 Qoodly – Tüm hakları saklıdır.",
     "privacyPolicy": "Gizlilik Politikası",
     "termsOfUse": "Kullanım Koşulları"
