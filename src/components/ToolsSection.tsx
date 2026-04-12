@@ -118,21 +118,52 @@ const toolShapes = [
   },
   {
     id: "ui",
-    color: "#00b4d8",
-    gradient: "from-[#00b4d8] to-[#88ce02]",
-    link: undefined,
+    color: "#c084fc",
+    gradient: "from-[#c084fc] to-[#818cf8]",
+    link: "https://www.linkedin.com/in/şevval-neva-durmuş-815664329/",
     shape: (
       <svg viewBox="0 0 100 100" className="w-full h-full">
         <defs>
           <linearGradient id="uiGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#00b4d8" />
-            <stop offset="100%" stopColor="#88ce02" />
+            <stop offset="0%" stopColor="#c084fc" />
+            <stop offset="100%" stopColor="#818cf8" />
           </linearGradient>
         </defs>
         <rect x="10" y="10" width="35" height="35" fill="url(#uiGrad)" opacity="0.8" />
         <rect x="55" y="10" width="35" height="35" fill="url(#uiGrad)" opacity="0.6" />
         <rect x="10" y="55" width="35" height="35" fill="url(#uiGrad)" opacity="0.6" />
         <rect x="55" y="55" width="35" height="35" fill="url(#uiGrad)" opacity="0.8" />
+        <text
+          x="50"
+          y="70"
+          textAnchor="middle"
+          fill="#0a0a0a"
+          fontSize="52"
+          fontWeight="900"
+          fontFamily="'Inter', 'Arial', sans-serif"
+        >
+          4
+        </text>
+      </svg>
+    ),
+  },
+  {
+    id: "together",
+    color: "#00b4d8",
+    gradient: "from-[#00b4d8] to-[#88ce02]",
+    link: undefined,
+    shape: (
+      <svg viewBox="0 0 100 100" className="w-full h-full">
+        <defs>
+          <linearGradient id="togetherGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#00b4d8" />
+            <stop offset="100%" stopColor="#88ce02" />
+          </linearGradient>
+        </defs>
+        <circle cx="50" cy="50" r="40" fill="url(#togetherGrad)" opacity="0.8" />
+        <circle cx="30" cy="40" r="12" fill="#fff" opacity="0.3" />
+        <circle cx="70" cy="40" r="12" fill="#fff" opacity="0.3" />
+        <circle cx="50" cy="62" r="12" fill="#fff" opacity="0.3" />
       </svg>
     ),
   },
@@ -146,7 +177,8 @@ export function ToolsSection() {
     { ...toolShapes[0], title: t("tool1Title"), description: t("tool1Description"), cta: t("seeMore") },
     { ...toolShapes[1], title: t("tool2Title"), description: t("tool2Description"), cta: t("seeMore") },
     { ...toolShapes[2], title: t("tool3Title"), description: t("tool3Description"), cta: t("seeMore") },
-    { ...toolShapes[3], title: t("tool4Title"), description: t("tool4Description"), cta: "" },
+    { ...toolShapes[3], title: t("tool4Title"), description: t("tool4Description"), cta: t("seeMore") },
+    { ...toolShapes[4], title: t("tool5Title"), description: t("tool5Description"), cta: "" },
   ];
 
   useEffect(() => {

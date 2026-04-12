@@ -57,7 +57,7 @@ function TeamSchema() {
     {
       name: "Şevval Neva Durmuş",
       jobTitle: "UI Architect",
-      url: "https://www.linkedin.com/",
+      url: "https://www.linkedin.com/in/şevval-neva-durmuş-815664329/",
     },
   ];
 
