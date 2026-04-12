@@ -93,7 +93,7 @@ export function WorkProjectsSection() {
       </div>
 
       {/* Projects Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-16">
 
         {/* Project 1 — Weekweeky */}
         <div className="project-card border border-white/10 rounded-2xl overflow-hidden bg-white/5 backdrop-blur-sm hover:border-white/20 transition-all group">
@@ -176,6 +176,24 @@ export function WorkProjectsSection() {
             <p className="text-white/60 text-sm leading-relaxed mb-4">{t("project3Description")}</p>
             <span className="inline-flex items-center gap-2 text-[#ff6b9d] text-sm font-medium opacity-60 cursor-not-allowed">
               {t("project3ComingSoon")}
+            </span>
+          </div>
+        </div>
+
+        {/* Project 4 — Rotabosna */}
+        <div className="project-card border border-white/10 rounded-2xl overflow-hidden bg-white/5 backdrop-blur-sm hover:border-white/20 transition-all group">
+          <div className="h-56 flex items-center justify-center" style={{ background: "linear-gradient(135deg, #fef9c3 0%, #fde68a 100%)" }}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/logo-rotabosna.png" alt="Rotabosna" className="w-32 h-32 object-contain" />
+          </div>
+          <div className="p-6">
+            <span className="inline-block px-3 py-1 rounded-full text-xs font-medium mb-3 text-[#b45309]" style={{ background: "rgba(253,230,138,0.4)" }}>
+              {t("project4Badge")}
+            </span>
+            <h3 className="text-xl font-bold text-white mb-2">{t("project4Title")}</h3>
+            <p className="text-white/60 text-sm leading-relaxed mb-4">{t("project4Description")}</p>
+            <span className="inline-flex items-center gap-2 text-[#fde68a] text-sm font-medium opacity-60 cursor-not-allowed">
+              {t("project4ComingSoon")}
             </span>
           </div>
         </div>
