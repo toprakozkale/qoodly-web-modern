@@ -125,14 +125,14 @@ const toolShapes = [
       <svg viewBox="0 0 100 100" className="w-full h-full">
         <defs>
           <linearGradient id="uiGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#c084fc" />
-            <stop offset="100%" stopColor="#818cf8" />
+            <stop offset="0%" stopColor="#00b4d8" />
+            <stop offset="100%" stopColor="#88ce02" />
           </linearGradient>
         </defs>
-        <rect x="10" y="10" width="35" height="35" fill="url(#uiGrad)" opacity="0.8" />
-        <rect x="55" y="10" width="35" height="35" fill="url(#uiGrad)" opacity="0.6" />
-        <rect x="10" y="55" width="35" height="35" fill="url(#uiGrad)" opacity="0.6" />
-        <rect x="55" y="55" width="35" height="35" fill="url(#uiGrad)" opacity="0.8" />
+        <circle cx="50" cy="50" r="40" fill="url(#uiGrad)" opacity="0.8" />
+        <circle cx="30" cy="40" r="12" fill="#fff" opacity="0.3" />
+        <circle cx="70" cy="40" r="12" fill="#fff" opacity="0.3" />
+        <circle cx="50" cy="62" r="12" fill="#fff" opacity="0.3" />
         <text
           x="50"
           y="70"
@@ -156,14 +156,14 @@ const toolShapes = [
       <svg viewBox="0 0 100 100" className="w-full h-full">
         <defs>
           <linearGradient id="togetherGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#00b4d8" />
-            <stop offset="100%" stopColor="#88ce02" />
+            <stop offset="0%" stopColor="#c084fc" />
+            <stop offset="100%" stopColor="#818cf8" />
           </linearGradient>
         </defs>
-        <circle cx="50" cy="50" r="40" fill="url(#togetherGrad)" opacity="0.8" />
-        <circle cx="30" cy="40" r="12" fill="#fff" opacity="0.3" />
-        <circle cx="70" cy="40" r="12" fill="#fff" opacity="0.3" />
-        <circle cx="50" cy="62" r="12" fill="#fff" opacity="0.3" />
+        <rect x="10" y="10" width="35" height="35" fill="url(#togetherGrad)" opacity="0.8" />
+        <rect x="55" y="10" width="35" height="35" fill="url(#togetherGrad)" opacity="0.6" />
+        <rect x="10" y="55" width="35" height="35" fill="url(#togetherGrad)" opacity="0.6" />
+        <rect x="55" y="55" width="35" height="35" fill="url(#togetherGrad)" opacity="0.8" />
       </svg>
     ),
   },
